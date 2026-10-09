@@ -11,10 +11,8 @@ import { u } from "../../lib/u";
 <section class="section"><div class="container"><div class="inst-grid">
 {instructors.map(i => (
   <div class="inst-card">
-    <span class="avatar"><img src={u(`/images/instructors/${i.slug}.svg`)} alt={i.name} width="144" height="144" loading="lazy" /></span>
-    <b>{i.name}</b>
-    <small>{i.courses} courses • {i.reviews} reviews • {i.students} students</small>
-    <div style="margin-top:6px;font-size:13px">⭐ {i.rating} • {i.specialty}</div>
+    <span class="avatar"><img src={u(i.image ?? `/images/instructors/${i.slug}.svg`)} alt={i.name} width="44" height="44" loading="lazy" /></span>
+    <span><b>{i.name}</b><small>{i.courses} courses • {i.reviews} reviews • {i.students} students</small></span>
   </div>
 ))}
 </div></div></section>

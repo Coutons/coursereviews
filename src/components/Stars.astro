@@ -1,11 +1,14 @@
 ---
 interface Props { rating: number; reviews?: number; showCount?: boolean }
 const { rating, reviews, showCount = true } = Astro.props;
-const full = Math.round(rating);
+const pct = Math.max(0, Math.min(100, (rating / 5) * 100));
 function fmt(n:number){ if(n>=1000) return (n/1000).toFixed(n>=100000?0:1)+"K"; return String(n); }
 ---
-<span class="stars" aria-label={`Rated ${rating} out of 5`}>
-  <span style="color:#f59e0b">{"★".repeat(full)}<span style="color:#e5e7eb">{"★".repeat(5-full)}</span></span>
-  <span>{rating.toFixed(1)}</span>
-  {showCount && reviews!==undefined && <span class="n" title={`${reviews.toLocaleString("en-US")} reviews`}>({fmt(reviews)})</span>}
+<span class="stars" role="img" aria-label={`Rated ${rating} out of 5`}>
+  <span class="stars-bars" aria-hidden="true">
+    <span class="stars-on" style={`width:${pct}%`}>★★★★★</span>
+    <span class="stars-off">★★★★★</span>
+  </span>
+  <span class="stars-num">{rating.toFixed(1)}</span>
+  {showCount && reviews!==undefined && <span class="stars-count" title={`${reviews.toLocaleString("en-US")} reviews`}>({fmt(reviews)})</span>}
 </span>

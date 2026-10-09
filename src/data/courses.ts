@@ -17,13 +17,15 @@ export interface Course {
   emoji: string;
   bestseller?: boolean;
   description: string;
-  /** Local cover path, e.g. "/images/courses/my-course.jpg". Defaults to "/images/courses/<slug>.svg". */
+  /** Cover image: local path ("/images/courses/my-course.jpg") or absolute URL ("https://…"). Defaults to "/images/courses/<slug>.svg". */
   image?: string;
+  /** Outbound course URL (e.g. the Udemy landing/affiliate link). Omit if unavailable. */
+  url?: string;
 }
 
 export const courses: Course[] = [
   {
-    slug: "complete-python-bootcamp-zero-hero",
+    slug: "complete-python-bootcamp",
     title: "The Complete Python Bootcamp From Zero to Hero in Python",
     provider: "Udemy",
     category: "Python",
@@ -36,10 +38,10 @@ export const courses: Course[] = [
     level: "Beginner",
     duration: "22h total",
     updated: "09/2026",
-    gradient: "linear-gradient(135deg,#3776AB,#1e3a5f)",
-    emoji: "🐍",
-    bestseller: true,
-    description: "Learn Python 3 from scratch: syntax, OOP, web scraping, automation, and job-ready portfolio projects."
+    image: "https://img-c.udemycdn.com/course/480x270/567828_67d0.jpg",
+    url: "https://www.udemy.com/course/complete-python-bootcamp/?couponCode=KEEPLEARNING",
+    bestseller: false,
+    description: "Learn Python like a Professional Start from the basics and go all the way to creating your own applications and games."
   },
   {
     slug: "excel-beginner-to-advanced",
@@ -55,8 +57,8 @@ export const courses: Course[] = [
     level: "All levels",
     duration: "18.5h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#217346,#0e3b24)",
-    emoji: "📗",
+    image: "https://img-c.udemycdn.com/course/480x270/793796_0e89_5.jpg",
+    url: "https://www.udemy.com/course/microsoft-excel-2013-from-beginner-to-advanced-and-beyond/?couponCode=KEEPLEARNING",
     bestseller: true,
     description: "Master Excel: formulas, PivotTables, Power Query, dashboards, and VBA for analysts and finance teams."
   },
@@ -74,7 +76,7 @@ export const courses: Course[] = [
     level: "Beginner",
     duration: "65h total",
     updated: "10/2026",
-    image: "/images/courses/100-days-of-code.svg",
+    image: "https://img-c.udemycdn.com/course/480x270/2776760_f176_10.jpg",
     bestseller: true,
     description: "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!"
   },
@@ -92,8 +94,8 @@ export const courses: Course[] = [
     level: "Intermediate",
     duration: "27h total",
     updated: "09/2026",
-    gradient: "linear-gradient(135deg,#FF9900,#7c2d12)",
-    emoji: "☁️",
+    image: "https://img-c.udemycdn.com/course/480x270/2196488_8fc7_10.jpg",
+    url: "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/?couponCode=KEEPLEARNING",
     bestseller: true,
     description: "Pass the SAA-C03: EC2, S3, VPC, IAM, serverless, plus practice exams and hands-on labs."
   },
@@ -111,8 +113,8 @@ export const courses: Course[] = [
     level: "Beginner",
     duration: "74h total",
     updated: "08/2026",
-    gradient: "linear-gradient(135deg,#4F46E5,#0ea5e9)",
-    emoji: "🌐",
+    image: "https://img-c.udemycdn.com/course/480x270/625204_436a_3.jpg",
+    url: "https://www.udemy.com/course/the-web-developer-bootcamp/?couponCode=KEEPLEARNING",
     description: "The legendary bootcamp: HTML, CSS, JS, Node, Express, Mongo, auth, and deployment."
   },
   {
@@ -129,8 +131,9 @@ export const courses: Course[] = [
     level: "Beginner",
     duration: "9h total",
     updated: "09/2026",
-    gradient: "linear-gradient(135deg,#0ea5e9,#1e3a8a)",
-    emoji: "🗄️",
+    image: "https://img-c.udemycdn.com/course/480x270/762616_7693_3.jpg",
+    url: "https://www.udemy.com/course/the-complete-sql-bootcamp/?couponCode=KEEPLEARNING",
+    bestseller: true,
     description: "PostgreSQL from SELECT to window functions, joins, and query optimization."
   },
   {
@@ -147,8 +150,9 @@ export const courses: Course[] = [
     level: "Intermediate",
     duration: "68h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#61dafb,#4F46E5)",
-    emoji: "⚛️",
+    image: "https://img-c.udemycdn.com/course/480x270/1362070_b9a1_2.jpg",
+    url: "https://www.udemy.com/course/react-the-complete-guide-incl-redux/?couponCode=KEEPLEARNING",
+    bestseller: true,
     description: "Hooks, Router, Redux, Next.js 15, Server Components, and TypeScript."
   },
   {
@@ -165,80 +169,85 @@ export const courses: Course[] = [
     level: "Intermediate",
     duration: "36h total",
     updated: "07/2026",
-    gradient: "linear-gradient(135deg,#dd0031,#7c2d12)",
-    emoji: "🅰️",
+    image: "https://img-c.udemycdn.com/course/480x270/756150_c033_4.jpg",
+    url: "https://www.udemy.com/course/the-complete-guide-to-angular-2/?couponCode=KEEPLEARNING",
+    bestseller: true,
     description: "Standalone components, signals, RxJS, NgRx, and deployment."
   },
   {
-    slug: "shamanic-life-coach-certification",
-    title: "Shamanic Life Coach Certification (Accredited)",
+    slug: "the-complete-agentic-ai-engineering-course",
+    title: "AI Engineer Agentic Track: The Complete Agent & MCP Course",
     provider: "Udemy",
-    category: "Health & Fitness",
-    categorySlug: "health-and-fitness",
-    instructor: "Joeel & Natalie",
-    instructorSlug: "joeelnatalie",
+    category: "AI Agents & Agentic AI",
+    categorySlug: "ai-agents",
+    instructor: "Ed Donner",
+    instructorSlug: "ed-donner",
     rating: 4.6,
     reviews: 1656,
     price: 18.99,
     level: "All levels",
-    duration: "12h total",
+    duration: "21h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#65a30d,#14532d)",
-    emoji: "🧘",
-    description: "Accredited life-coach certification based on shamanic practice and transformation."
+    image: "https://img-c.udemycdn.com/course/480x270/6566789_2e8a_10.jpg",
+    url: "https://www.udemy.com/course/the-complete-agentic-ai-engineering-course/?couponCode=KEEPLEARNING",
+    bestseller: true,
+    description: "Master AI Agents in 30 days: build 8 real-world projects with OpenAI Agents SDK, CrewAI, LangGraph, AutoGen and MCP."
   },
   {
-    slug: "financial-planning-coaching",
-    title: "Financial Planning Coaching Certification Holistic Coaching",
+    slug: "the-ai-engineer-course-complete-ai-engineer-bootcamp",
+    title: "The AI Engineer Course 2026: Complete AI Engineer Bootcamp",
     provider: "Udemy",
-    category: "Finance & Accounting",
-    categorySlug: "finance-and-accounting",
-    instructor: "Holistic Coach Academy",
-    instructorSlug: "holistic-coach",
+    category: "Artificial Intelligence (AI)",
+    categorySlug: "artificial-intelligence",
+    instructor: "365 Careers",
+    instructorSlug: "365-careers",
     rating: 4.2,
     reviews: 1552,
     price: 16.99,
     level: "Beginner",
     duration: "8h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#16a34a,#052e16)",
-    emoji: "💰",
-    description: "Holistic financial coaching for clients and independent practice."
+    image: "https://img-c.udemycdn.com/course/480x270/6112535_7103.jpg",
+    url: "https://www.udemy.com/course/the-ai-engineer-course-complete-ai-engineer-bootcamp/?couponCode=KEEPLEARNING",
+    bestseller: true,
+    description: "Complete AI Engineer Training: Python, NLP, Transformers, LLMs, LangChain, Hugging Face, APIs"
   },
   {
-    slug: "management-consulting-toolkit",
-    title: "Management Consulting Techniques, Tools and Frameworks",
+    slug: "playwright-tutorials-automation-testing",
+    title: "Playwright JS/TS Automation Testing from Scratch & Framework",
     provider: "Udemy",
-    category: "Business",
-    categorySlug: "business",
-    instructor: "Asen Gyczew",
-    instructorSlug: "asen-gyczew",
+    category: "Microsoft Playwright",
+    categorySlug: "microsoft-playwright",
+    instructor: "Rahul Shetty Academy",
+    instructorSlug: "rahul-shetty-academy",
     rating: 4.5,
     reviews: 1408,
     price: 13.99,
     level: "Intermediate",
     duration: "11h total",
     updated: "09/2026",
-    gradient: "linear-gradient(135deg,#1e3a8a,#0ea5e9)",
-    emoji: "💼",
-    description: "McKinsey/BCG frameworks, MECE, case interviews, and problem solving."
+    image: "https://img-c.udemycdn.com/course/480x270/4574326_d02f_5.jpg",
+    url: "https://www.udemy.com/course/playwright-tutorials-automation-testing/?couponCode=KEEPLEARNING",
+    bestseller: true,
+    description: "150k Learners- Playwright tutorials on TypeScript and JavaScript (Web - API )Testing, AI Agents, Cucumber, CI/CD etc."
   },
   {
-    slug: "facebook-marketing-2026",
-    title: "1000% More Engagement: 2026 Facebook Marketing, Facebook Ads",
+    slug: "langchain",
+    title: "LangChain- Agentic AI Engineering with LangChain & LangGraph",
     provider: "Udemy",
-    category: "Social Media Marketing",
-    categorySlug: "social-media-marketing",
-    instructor: "Alex Genadinik",
-    instructorSlug: "alex-genadinik",
+    category: "LangChain",
+    categorySlug: "langchain",
+    instructor: "Eden Marco",
+    instructorSlug: "eden-marco",
     rating: 4.0,
     reviews: 1102,
     price: 17.99,
     level: "Beginner",
     duration: "9.5h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#1877f2,#1e1b4b)",
-    emoji: "📱",
+    image: "https://img-c.udemycdn.com/course/480x270/5281528_8f36.jpg",
+    url: "https://www.udemy.com/course/langchain/?couponCode=KEEPLEARNING",
+    bestseller: true,
     description: "Facebook Ads and organic growth in 2026: targeting, creatives, and retargeting."
   },
 ];
