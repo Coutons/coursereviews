@@ -7,7 +7,7 @@ const { course } = Astro.props;
 ---
 <article class="course-card">
   <a class="course-thumb" href={u(`/course/${course.slug}`)} aria-label={course.title}>
-    <img src={u(`/images/courses/${course.slug}.svg`)} alt={course.title} width="640" height="360" loading="lazy" />
+    <img src={u(course.image ?? `/images/courses/${course.slug}.svg`)} alt={course.title} width="640" height="360" loading="lazy" />
     {course.bestseller && <span class="badge-best">Bestseller</span>}
   </a>
   <div class="course-body">

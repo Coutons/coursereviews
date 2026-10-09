@@ -7,5 +7,5 @@ function fmt(n:number){ if(n>=1000) return (n/1000).toFixed(n>=100000?0:1)+"K"; 
 <span class="stars" aria-label={`Rated ${rating} out of 5`}>
   <span style="color:#f59e0b">{"★".repeat(full)}<span style="color:#e5e7eb">{"★".repeat(5-full)}</span></span>
   <span>{rating.toFixed(1)}</span>
-  {showCount && reviews!==undefined && <span class="n">({reviews.toLocaleString("en-US")} • {fmt(reviews)})</span>}
+  {showCount && reviews!==undefined && <span class="n" title={`${reviews.toLocaleString("en-US")} reviews`}>({fmt(reviews)})</span>}
 </span>

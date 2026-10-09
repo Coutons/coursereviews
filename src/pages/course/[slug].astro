@@ -61,7 +61,7 @@ const others = courses.filter(c => c.slug !== course.slug).slice(0,3);
     <div class="course-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{others.map(c => <CourseCard course={c} />)}</div>
   </div>
   <aside class="side-card">
-    <div class="course-thumb" style="border-radius:10px;overflow:hidden"><img src={u(`/images/courses/${course.slug}.svg`)} alt={course.title} width="640" height="360" /></div>
+    <div class="course-thumb" style="border-radius:10px;overflow:hidden"><img src={u(course.image ?? `/images/courses/${course.slug}.svg`)} alt={course.title} width="640" height="360" /></div>
     <div style="font-size:28px;font-weight:800;margin-top:10px">${course.price}</div>
     <div style="margin:6px 0"><Stars rating={course.rating} reviews={course.reviews} showCount={false} /></div>
     <a href={u("/review-course")} class="btn-dark" style="display:flex;width:100%;margin-top:10px">Visit course on {course.provider} →</a>

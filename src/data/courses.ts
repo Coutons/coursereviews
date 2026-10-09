@@ -17,6 +17,8 @@ export interface Course {
   emoji: string;
   bestseller?: boolean;
   description: string;
+  /** Local cover path, e.g. "/images/courses/my-course.jpg". Defaults to "/images/courses/<slug>.svg". */
+  image?: string;
 }
 
 export const courses: Course[] = [
@@ -59,23 +61,22 @@ export const courses: Course[] = [
     description: "Master Excel: formulas, PivotTables, Power Query, dashboards, and VBA for analysts and finance teams."
   },
   {
-    slug: "complete-web-development-bootcamp",
-    title: "The Complete Full-Stack Web Development Bootcamp",
+    slug: "100-days-of-code",
+    title: "100 Days of Code™: The Complete Python Pro Bootcamp",
     provider: "Udemy",
-    category: "Javascript",
-    categorySlug: "javascript",
+    category: "Python",
+    categorySlug: "python",
     instructor: "Dr. Angela Yu",
     instructorSlug: "angela-yu",
     rating: 4.7,
-    reviews: 474585,
+    reviews: 437756,
     price: 124.99,
     level: "Beginner",
     duration: "65h total",
     updated: "10/2026",
-    gradient: "linear-gradient(135deg,#f7df1e,#f97316)",
-    emoji: "⚡",
+    image: "/images/courses/100-days-of-code.svg",
     bestseller: true,
-    description: "HTML, CSS, JavaScript, Node, React, MongoDB and Web3 — one complete full-stack bootcamp."
+    description: "Master Python by building 100 projects in 100 days. Learn data science, automation, build websites, games and apps!"
   },
   {
     slug: "ultimate-aws-solutions-architect",

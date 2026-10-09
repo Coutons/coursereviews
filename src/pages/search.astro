@@ -42,7 +42,7 @@ const base = import.meta.env.BASE_URL;
   if (box) {
     box.innerHTML = hits.map(c => `
       <a class="course-card" href="${base}course/${c.slug}">
-        <div class="course-thumb"><img src="${base}images/courses/${c.slug}.svg" alt="${c.title}" loading="lazy" /></div>
+        <div class="course-thumb"><img src="${base}${(c.image || `images/courses/${c.slug}.svg`).replace(/^\//, '')}" alt="${c.title}" loading="lazy" /></div>
         <div class="course-body">
           <div class="course-meta"><i>${c.provider}</i>${c.category}</div>
           <h3 class="course-title">${c.title}</h3>
