@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Sign in — CourseReviews">
+<Header />
+<section class="section"><div class="container" style="max-width:440px">
+<form class="form-card" onsubmit="return false">
+<h2 style="margin:0">Welcome back</h2>
+<p style="color:var(--muted)">Sign in to manage your reviews.</p>
+<label>Email</label><input type="email" required placeholder="you@example.com" />
+<label>Password</label><input type="password" required placeholder="••••••••" />
+<button class="btn-dark" style="margin-top:14px;width:100%">Sign in</button>
+<p style="font-size:14px">No account? <a href="/review-course" style="color:var(--blue);font-weight:800">Write a review first</a></p>
+</form>
+</div></section>
+<Footer />
+</Layout>

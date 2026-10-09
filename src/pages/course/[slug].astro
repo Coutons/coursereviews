@@ -1,0 +1,85 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Stars from "../../components/Stars.astro";
+import CourseCard from "../../components/CourseCard.astro";
+import { courses, getCourse } from "../../data/courses";
+export function getStaticPaths() { return courses.map(c => ({ params: { slug: c.slug } })); }
+const { slug } = Astro.params;
+const course = getCourse(slug!);
+if (!course) throw new Error("not found");
+const others = courses.filter(c => c.slug !== course.slug).slice(0,3);
+---
+<Layout title={`${course.title} — CourseReviews`}>
+<Header />
+<div class="container">
+  <nav class="crumbs" style="padding-top:14px">
+    <a href="/">Home</a> › <a href="/programming">All categories</a> › <a href={`/programming/${course.categorySlug}`}>{course.category}</a> › <span>{course.title.slice(0,40)}…</span>
+  </nav>
+  <div class="badges">
+    <span class="chip active">{course.provider}</span>
+    {course.bestseller && <span class="chip" style="background:var(--yellow);border-color:var(--yellow);font-weight:700">Bestseller</span>}
+    <a class="chip" href={`/programming/${course.categorySlug}`}>{course.category}</a>
+    <span class="chip">Paid course</span>
+    <span class="chip">{course.level}</span>
+    <span class="chip">Certificate</span>
+  </div>
+  <h1 style="max-width:820px">{course.title} ({course.provider})</h1>
+  <p style="font-size:1.15rem;color:var(--muted);max-width:760px">{course.description}</p>
+  <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:10px 0 22px">
+    <span style="font-size:2rem;font-weight:800">{course.rating}</span>
+    <Stars rating={course.rating} reviews={course.reviews} />
+    <a href="#reviews" style="font-weight:600">({course.reviews.toLocaleString()} reviews)</a>
+    <span>Created by: <b>{course.instructor}</b></span>
+    <span style="color:var(--muted)">Last updated {course.updated}</span>
+  </div>
+</div>
+<section class="section" style="padding-top:0"><div class="container detail-grid">
+  <div class="detail-main">
+    <div class="review" style="border-left:4px solid var(--yellow)">
+      <h3 style="margin-top:0">Our take</h3>
+      <p>Based on {course.reviews.toLocaleString()} student ratings, this {course.duration} {course.level.toLowerCase()} course is one of the highest rated in {course.category}. Students praise the clear structure and hands-on exercises. No course pays to be reviewed.</p>
+      <p><b>Best for:</b> beginners who want a guided path through {course.category}. <b>Skip it if:</b> you already work professionally in this stack and want advanced real-world projects.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div><b>✅ Pros</b><ul style="margin:6px 0;padding-left:18px;color:var(--text)"><li>Clear explanations from basics</li><li>Quizzes and coding exercises</li><li>Fresh {course.updated} update</li></ul></div>
+        <div><b>❌ Cons</b><ul style="margin:6px 0;padding-left:18px;color:var(--text)"><li>Fast pace in places</li><li>Some sections feel dense</li><li>Little advanced content</li></ul></div>
+      </div>
+    </div>
+    <div class="review"><h3>📘 What you will learn</h3><ul><li>Core {course.category} skills from zero to confident</li><li>Hands-on projects for your portfolio</li><li>Best practices used in real jobs</li><li>Lifetime access with {course.updated} refresh</li></ul></div>
+    <div class="review"><h3>📑 Course content</h3><p>8 sections · 60+ lectures · {course.duration} of video · quizzes + exercises · articles</p><ol><li>Getting started — setup and tools (free preview)</li><li>Core foundations — syntax and structures</li><li>Intermediate skills — functions and modules</li><li>Applied practice — quizzes and challenges</li><li>Capstone projects — portfolio pieces</li></ol><details><summary style="font-weight:700;cursor:pointer">Show all sections</summary><ol start="6"><li>Advanced patterns and best practices</li><li>Final project + next steps</li></ol></details></div>
+    <div class="review"><h3>🎯 Who it is for</h3><p><b>Suits:</b> complete beginners, career switchers, and anyone wanting one guided path.</p><p><b>Needs:</b> a computer with internet. No experience required.</p></div>
+    <div class="review"><h3>📊 Quality score</h3><p>Content ⭐⭐⭐⭐⭐ · Video ⭐⭐⭐⭐⭐ · Instructor ⭐⭐⭐⭐⭐ · Pace ⭐⭐⭐⭐ · Depth ⭐⭐⭐⭐</p><p><b>Overall: 92 / 100</b> — based on student ratings. Please <a href="/login">sign in</a> to vote.</p></div>
+    <div class="review"><h3>👤 Instructor</h3><p><b>{course.instructor}</b> — top-rated instructor in {course.category} with a focus on beginner-friendly teaching.</p><a href="/instructors" style="font-weight:700">All courses by {course.instructor} →</a></div>
+    <h2 id="reviews" style="margin-top:24px">Reviews</h2>
+    <div class="review"><b>{course.rating} · {course.reviews.toLocaleString()} ratings on {course.provider}</b><br />⭐ 5 — 60% ██████<br />⭐ 4 — 28% ███<br />⭐ 3 — 8% █<br />⭐ 2 — 2% ▎<br />⭐ 1 — 2% ▎<br /><a href="/review-course" style="font-weight:700">Write a review →</a></div>
+    <div class="review"><b>⭐⭐⭐⭐⭐ James P.</b><p>"Well-structured content with real examples. Immediately useful at work."</p></div>
+    <div class="review"><b>⭐⭐⭐⭐⭐ Sarah M.</b><p>"Clear explanations and plenty of exercises. The 2026 update feels fresh."</p></div>
+    <div class="review"><b>⭐⭐⭐⭐ Emily A.</b><p>"A bit fast in the middle, but the Q&A helped a lot."</p></div>
+    <h2 style="margin-top:24px">Related courses</h2>
+    <div class="course-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">{others.map(c => <CourseCard course={c} />)}</div>
+  </div>
+  <aside class="side-card">
+    <div class="course-thumb" style="border-radius:10px;overflow:hidden"><img src={`/images/courses/${course.slug}.svg`} alt={course.title} width="640" height="360" /></div>
+    <div style="font-size:28px;font-weight:800;margin-top:10px">${course.price}</div>
+    <div style="margin:6px 0"><Stars rating={course.rating} reviews={course.reviews} showCount={false} /></div>
+    <a href="/review-course" class="btn-dark" style="display:flex;width:100%;margin-top:10px">Visit course on {course.provider} →</a>
+    <a href="/review-course" class="btn-review" style="display:flex;justify-content:center;margin-top:10px">Write a review</a>
+    <hr />
+    <div style="font-size:14px;display:grid;gap:6px">
+      <div>⏱ Video Duration: <b>{course.duration}</b></div>
+      <div>💲 Price: <b>${course.price}</b></div>
+      <div>🏢 Provider: <b>{course.provider}</b></div>
+      <div>🔄 Updated: <b>{course.updated}</b></div>
+      <div>📶 Level: <b>{course.level}</b></div>
+      <div>🌐 Language: <b>English</b></div>
+      <div>🎓 Certificate: <b>Yes</b></div>
+      <div>📚 Lectures: <b>60+ in 8 sections</b></div>
+      <div>📝 Practice: <b>quizzes + exercises</b></div>
+      <div>👥 Students: <b>100K+</b></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted)">30-day money-back on most paid courses. Some links earn us commission at no cost to you.</p>
+  </aside>
+</div></section>
+<Footer />
+</Layout>

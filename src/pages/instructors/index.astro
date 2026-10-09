@@ -1,0 +1,21 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { instructors } from "../../data/instructors";
+---
+<Layout title="All instructors A-Z — CourseReviews">
+<Header />
+<section class="page-hero"><div class="container"><h1>All instructors A-Z</h1><p>The most-reviewed instructors, ranked by students.</p></div></section>
+<section class="section"><div class="container"><div class="inst-grid">
+{instructors.map(i => (
+  <div class="inst-card">
+    <span class="avatar"><img src={`/images/instructors/${i.slug}.svg`} alt={i.name} width="144" height="144" loading="lazy" /></span>
+    <b>{i.name}</b>
+    <small>{i.courses} courses • {i.reviews} reviews • {i.students} students</small>
+    <div style="margin-top:6px;font-size:13px">⭐ {i.rating} • {i.specialty}</div>
+  </div>
+))}
+</div></div></section>
+<Footer />
+</Layout>

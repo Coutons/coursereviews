@@ -1,0 +1,21 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const { title = "CourseReviews — Student Reviews for Online Courses", description = "Find honest reviews, pricing, and details for online courses from Udemy, Coursera, edX, and more — all in one place." } = Astro.props;
+import "../styles/global.css";
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

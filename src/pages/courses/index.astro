@@ -1,0 +1,26 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CourseCard from "../../components/CourseCard.astro";
+import { courses } from "../../data/courses";
+---
+<Layout title="All courses A-Z — CourseReviews">
+<Header />
+<section class="page-hero"><div class="container"><h1>All courses A-Z</h1><p>{courses.length} featured • 150+ providers • live search below (client-side).</p></div></section>
+<section class="section"><div class="container">
+  <input id="q" placeholder="Filter courses…" style="width:100%;border:2px solid var(--navy);border-radius:12px;padding:13px 15px;font-size:16px" />
+  <div class="course-grid" id="grid" style="margin-top:16px">
+    {courses.map(c => <div class="js-item" data-title={(c.title+c.instructor+c.category).toLowerCase()}><CourseCard course={c} /></div>)}
+  </div>
+</div></section>
+<Footer />
+</Layout>
+<script>
+  const q = document.getElementById('q') as HTMLInputElement;
+  const items = [...document.querySelectorAll('.js-item')] as HTMLElement[];
+  q?.addEventListener('input', () => {
+    const v = q.value.toLowerCase();
+    items.forEach(el => { el.style.display = (el.dataset.title||'').includes(v) ? '' : 'none'; });
+  });
+</script>

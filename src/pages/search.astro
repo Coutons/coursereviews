@@ -1,0 +1,53 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CourseCard from "../components/CourseCard.astro";
+import { courses } from "../data/courses";
+import { categories } from "../data/categories";
+---
+<Layout title="Search courses — CourseReviews">
+<Header />
+<section class="page-hero"><div class="container"><h1>Search</h1><p>Search courses, instructors, and topics.</p>
+<form action="/search" method="get" class="hero-search" style="margin-top:14px;max-width:560px">
+<input name="q" id="searchInput" placeholder="Try 'Python', 'Excel', 'Angela Yu'…" />
+<button type="submit">Search</button>
+</form>
+</div></section>
+<section class="section"><div class="container">
+<div id="count" style="font-weight:800;margin-bottom:12px"></div>
+<div class="course-grid" id="results"></div>
+<h2 style="margin-top:28px">Browse topics</h2>
+<div class="topic-grid">
+{categories.slice(0,8).map(t => (
+<a class="topic-card" href={`/programming/${t.slug}`}><span class="topic-ico"><img src={`/images/categories/${t.slug}.svg`} alt={t.name} width="64" height="64" loading="lazy" /></span><span><b>{t.name}</b><small>{t.courses} courses</small></span></a>
+))}
+</div>
+</div></section>
+<Footer />
+</Layout>
+<script define:vars={{ courses }}>
+  const params = new URLSearchParams(location.search);
+  const q = (params.get('q') || '').toLowerCase();
+  const input = document.getElementById('searchInput');
+  if (input) input.value = params.get('q') || '';
+  const box = document.getElementById('results');
+  const count = document.getElementById('count');
+  const hits = !q ? courses : courses.filter(c =>
+    (c.title + ' ' + c.instructor + ' ' + c.category + ' ' + c.provider).toLowerCase().includes(q)
+  );
+  if (count) count.textContent = q ? `${hits.length} result(s) for "${params.get('q')}"` : 'Popular courses';
+  if (box) {
+    box.innerHTML = hits.map(c => `
+      <a class="course-card" href="/course/${c.slug}">
+        <div class="course-thumb"><img src="/images/courses/${c.slug}.svg" alt="${c.title}" loading="lazy" /></div>
+        <div class="course-body">
+          <div class="course-meta"><i>${c.provider}</i>${c.category}</div>
+          <h3 class="course-title">${c.title}</h3>
+          <div class="course-by">by ${c.instructor}</div>
+          <div class="stars">⭐ ${c.rating} <span class="n">(${c.reviews.toLocaleString()})</span></div>
+          <div class="price-row"><span class="price">$${c.price}</span><span style="font-size:12px;color:var(--muted);font-weight:700">${c.duration}</span></div>
+        </div>
+      </a>`).join('') || '<p>No results. Try another keyword.</p>';
+  }
+</script>

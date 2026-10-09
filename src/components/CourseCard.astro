@@ -1,0 +1,20 @@
+---
+import Stars from "./Stars.astro";
+import type { Course } from "../data/courses";
+interface Props { course: Course }
+const { course } = Astro.props;
+---
+<article class="course-card">
+  <a class="course-thumb" href={`/course/${course.slug}`} aria-label={course.title}>
+    <img src={`/images/courses/${course.slug}.svg`} alt={course.title} width="640" height="360" loading="lazy" />
+    {course.bestseller && <span class="badge-best">Bestseller</span>}
+  </a>
+  <div class="course-body">
+    <h3 class="course-title"><a href={`/course/${course.slug}`}>{course.title}</a></h3>
+    <div class="course-meta"><a href={`/programming/${course.categorySlug}`}>{course.category}</a><span class="course-by">by {course.instructor}</span></div>
+    <div class="price-row">
+      <span class="cd-rating"><Stars rating={course.rating} reviews={course.reviews} /></span>
+      <span class="price">${course.price}</span>
+    </div>
+  </div>
+</article>

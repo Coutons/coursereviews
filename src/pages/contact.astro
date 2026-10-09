@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Contact — CourseReviews">
+<Header />
+<section class="page-hero"><div class="container"><h1>Contact</h1><p>Questions, corrections, or partnerships — we reply within 2 business days.</p></div></section>
+<section class="section"><div class="container" style="max-width:620px">
+<form class="form-card" onsubmit="event.preventDefault();document.getElementById('ok').style.display='block'">
+<label>Name</label><input required placeholder="Your name" />
+<label>Email</label><input type="email" required placeholder="you@example.com" />
+<label>Message</label><textarea rows="5" required placeholder="How can we help?"></textarea>
+<button class="btn-dark" style="margin-top:14px;width:100%">Send message</button>
+<p id="ok" style="display:none;background:#dcfce7;border:1px solid #16a34a;padding:10px;border-radius:10px;margin-top:12px">Message sent. Thank you!</p>
+</form>
+</div></section>
+<Footer />
+</Layout>

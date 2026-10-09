@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import CourseCard from "../../components/CourseCard.astro";
+import { categories, getCategory } from "../../data/categories";
+import { courses } from "../../data/courses";
+
+export function getStaticPaths() {
+  return categories.map(c => ({ params: { slug: c.slug } }));
+}
+const { slug } = Astro.params;
+const cat = getCategory(slug!);
+if (!cat) throw new Error("Category not found");
+const related = courses.filter(c => c.categorySlug === slug || c.category.toLowerCase().includes(cat.name.toLowerCase().split(" ")[0]));
+const list = related.length ? related : courses.slice(0,4);
+---
+<Layout title={`${cat.name} Courses — Reviews, Prices — CourseReviews`}>
+<Header />
+<section class="page-hero"><div class="container">
+  <div style="font-size:40px">{cat.icon}</div>
+  <h1>{cat.name} Courses</h1>
+  <p>{cat.description} • {cat.courses.toLocaleString()} courses • Updated Oct 2026</p>
+  <div style="margin-top:12px"><a href="/programming" style="color:var(--yellow);font-weight:800">← All categories</a></div>
+</div></section>
+<section class="section"><div class="container">
+  <div class="toolbar">
+    <span class="chip active">Best rated</span><span class="chip">Most reviewed</span><span class="chip">Beginner</span><span class="chip">Under $20</span>
+  </div>
+  <div class="course-grid">
+    {list.map(c => <CourseCard course={c} />)}
+  </div>
+  <div class="review">
+    <h3>How we rank {cat.name} courses</h3>
+    <p style="color:var(--muted)">Ranked by average rating × review count, update freshness, and curriculum completeness. Pricing is checked regularly with providers.</p>
+  </div>
+</div></section>
+<Footer />
+</Layout>

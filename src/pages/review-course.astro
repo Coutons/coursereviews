@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<Layout title="Write a review — CourseReviews">
+<Header />
+<section class="page-hero"><div class="container"><h1>Write a review</h1><p>A two-minute review helps thousands of students. Providers cannot edit or remove what you write.</p></div></section>
+<section class="section"><div class="container" style="max-width:680px">
+<form class="form-card" onsubmit="event.preventDefault();document.getElementById('done').style.display='block';window.scrollTo(0,0)">
+<label>Course title</label><input required placeholder="e.g. The Complete Python Bootcamp" />
+<label>Provider</label><select><option>Udemy</option><option>Coursera</option><option>edX</option><option>Udacity</option><option>Pluralsight</option><option>YouTube</option><option>Other</option></select>
+<label>Rating</label><select><option>5 — Excellent</option><option>4 — Good</option><option>3 — Average</option><option>2 — Poor</option><option>1 — Terrible</option></select>
+<label>Your review</label><textarea rows="5" required placeholder="What did you like? What could be better?"></textarea>
+<label>Display name</label><input placeholder="e.g. Alex" />
+<button class="btn-dark" style="margin-top:14px;width:100%">Submit review</button>
+<p id="done" style="display:none;background:#dcfce7;border:1px solid #16a34a;padding:10px;border-radius:10px;margin-top:12px">Thanks! Your review was received and will be published after moderation.</p>
+</form>
+</div></section>
+<Footer />
+</Layout>

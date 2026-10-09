@@ -1,0 +1,189 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CourseCard from "../components/CourseCard.astro";
+import { categories } from "../data/categories";
+import { courses, providers } from "../data/courses";
+import { instructors } from "../data/instructors";
+import { posts } from "../data/posts";
+
+const topTopics = [...categories].sort((a,b)=>b.courses-a.courses).slice(0,12);
+const topRated = courses.slice(0,8);
+const fresh = courses.slice(8,12);
+---
+
+<Layout title="CourseReviews — Student Reviews for Online Courses & Tutorials">
+<Header />
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>Discover World Class <br />Online Courses</h1>
+      <p class="hero-sub">Find Reviews for Online Courses</p>
+      <form class="hero-search" action="/search" method="get" role="search">
+        <input type="search" name="q" placeholder="Search courses ..." aria-label="Search courses" />
+        <button type="submit">Search</button>
+      </form>
+      <p class="popular"><span>Popular:</span>
+        <a href="/programming/python">Python</a>
+        <a href="/programming/javascript">JavaScript</a>
+        <a href="/programming/data-science">Data Science</a>
+        <a href="/programming/excel">Excel</a>
+      </p>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-shapes">
+        <i class="shape-circle-top"></i>
+        <i class="shape-circle-bottom"></i>
+        <i class="shape-cyl-tall"></i>
+        <i class="shape-cyl-short"></i>
+        <i class="shape-block"></i>
+      </div>
+      <div class="hero-person">
+        <div class="figure">🧑‍💼</div>
+        <div class="mega-phone">📣</div>
+        <small>Original illustration — 1.3M student reviews</small>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="hero-providers" aria-label="Courses from">
+  <div class="container marquee">
+    <span class="label">COURSES FROM</span>
+    <div class="marquee-track">
+      <span class="provider-word">Udemy</span>
+      <span class="provider-word">Coursera</span>
+      <span class="provider-word">edX</span>
+      <span class="provider-word">UDACITY</span>
+      <span class="provider-word">Pluralsight</span>
+      <span class="provider-word">YouTube</span>
+      <span class="provider-word">LinkedIn Learning</span>
+      <span class="provider-word">Udemy</span>
+      <span class="provider-word">Coursera</span>
+      <span class="provider-word">edX</span>
+      <span class="provider-word">UDACITY</span>
+      <span class="provider-word">Pluralsight</span>
+      <span class="provider-word">YouTube</span>
+      <span class="provider-word">LinkedIn Learning</span>
+    </div>
+    <a class="pill-more" href="/courses">+150 more →</a>
+  </div>
+</section>
+
+<!-- BROWSE BY TOPIC -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><h2>Browse by topic</h2><p>Pick a subject to see its best courses</p></div>
+      <a class="link-more" href="/programming">All 117 topics →</a>
+    </div>
+    <div class="topic-grid">
+      {topTopics.map(t => (
+        <a class="topic-card" href={`/programming/${t.slug}`}>
+          <span class="topic-ico"><img src={`/images/categories/${t.slug}.svg`} alt={t.name} width="64" height="64" loading="lazy" /></span>
+          <span><b>{t.name}</b><small>{t.courses.toLocaleString()} courses</small></span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- TOP RATED -->
+<section class="section soft">
+  <div class="container">
+    <div class="sec-head">
+      <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;letter-spacing:.06em;margin:0">Top rated</p><h2>Courses students rate highest</h2></div>
+      <a class="link-more" href="/courses">Browse all courses →</a>
+    </div>
+    <div class="course-grid">
+      {topRated.map(c => <CourseCard course={c} />)}
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">Why CourseReviews</p><h2>Choose with confidence</h2></div></div>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-ico">🌍</div><h3>Every provider in one place</h3><p>Udemy, Coursera, edX, YouTube, Udacity, Pluralsight and dozens more, compared side by side instead of tab by tab.</p></div>
+      <div class="why-card"><div class="why-ico">⭐</div><h3>1.3M real reviews</h3><p>Written by students who took the course. Providers cannot pay to bury or remove a bad one.</p></div>
+      <div class="why-card"><div class="why-ico">🔎</div><h3>Details you will not find elsewhere</h3><p>Video length, difficulty, certificates, language and the current price, checked for each course.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section class="section soft">
+  <div class="container">
+    <div class="sec-head">
+      <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">Most reviewed</p><h2>Instructors students trust most</h2></div>
+      <a class="link-more" href="/instructors">The top 10, ranked →</a>
+    </div>
+    <div class="inst-grid">
+      {instructors.map(i => (
+        <a class="inst-card" href="/instructors">
+          <span class="avatar"><img src={`/images/instructors/${i.slug}.svg`} alt={i.name} width="144" height="144" loading="lazy" /></span>
+          <b>{i.name}</b>
+          <small>{i.courses} courses, {i.reviews} reviews</small>
+          <div style="margin-top:6px;font-size:13px">⭐ {i.rating} • {i.specialty}</div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FRESH -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">Fresh content</p><h2>Recently updated courses</h2></div>
+    </div>
+    <div class="course-grid">
+      {fresh.map(c => <CourseCard course={c} />)}
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section soft">
+  <div class="container">
+    <div class="sec-head"><div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">How it works</p><h2>Three steps to the right course</h2></div></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Search or browse</h3><p>Type a course or instructor name, or start from one of 117 topics ranked by student rating.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Compare the details</h3><p>Ratings, review counts, length, level, price and what other students say, on one page per course.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Enrol on the provider's site</h3><p>Every course links straight to where it is sold. Some links earn us a commission, at no cost to you.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head">
+      <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">From the blog</p><h2>Guides and comparisons</h2></div>
+      <a class="link-more" href="/blog">All posts →</a>
+    </div>
+    <div class="blog-grid">
+      {posts.map(p => (
+        <a class="post-card" href="/blog">
+          <span class="post-thumb"><img src={`/images/blog/${p.slug}.svg`} alt={p.title} width="640" height="300" loading="lazy" /></span>
+          <div class="post-body"><time>{p.date}</time><h3>{p.title}</h3><p style="color:var(--muted);font-size:14px;margin:0">{p.excerpt}</p></div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="container cta-inner">
+    <div><h2>Taken a course lately?</h2><p style="margin:0">A two-minute review helps thousands of students pick the right course. Providers cannot edit or remove what you write.</p></div>
+    <a class="btn-dark" href="/review-course">Write a review →</a>
+  </div>
+</section>
+
+<Footer />
+</Layout>
