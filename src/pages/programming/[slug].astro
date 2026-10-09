@@ -5,6 +5,7 @@ import Footer from "../../components/Footer.astro";
 import CourseCard from "../../components/CourseCard.astro";
 import { categories, getCategory } from "../../data/categories";
 import { courses } from "../../data/courses";
+import { u } from "../../lib/u";
 
 export function getStaticPaths() {
   return categories.map(c => ({ params: { slug: c.slug } }));
@@ -18,10 +19,10 @@ const list = related.length ? related : courses.slice(0,4);
 <Layout title={`${cat.name} Courses — Reviews, Prices — CourseReviews`}>
 <Header />
 <section class="page-hero"><div class="container">
-  <div style="font-size:40px">{cat.icon}</div>
+  <div style="font-size:40px"><img src={u(`/images/categories/${cat.slug}.svg`)} alt={cat.name} width="80" height="80" /></div>
   <h1>{cat.name} Courses</h1>
   <p>{cat.description} • {cat.courses.toLocaleString()} courses • Updated Oct 2026</p>
-  <div style="margin-top:12px"><a href="/programming" style="color:var(--yellow);font-weight:800">← All categories</a></div>
+  <div style="margin-top:12px"><a href={u("/programming")} style="color:var(--blue);font-weight:800">← All categories</a></div>
 </div></section>
 <section class="section"><div class="container">
   <div class="toolbar">

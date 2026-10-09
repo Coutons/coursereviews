@@ -7,6 +7,7 @@ import { categories } from "../data/categories";
 import { courses, providers } from "../data/courses";
 import { instructors } from "../data/instructors";
 import { posts } from "../data/posts";
+import { u } from "../lib/u";
 
 const topTopics = [...categories].sort((a,b)=>b.courses-a.courses).slice(0,12);
 const topRated = courses.slice(0,8);
@@ -22,15 +23,15 @@ const fresh = courses.slice(8,12);
     <div>
       <h1>Discover World Class <br />Online Courses</h1>
       <p class="hero-sub">Find Reviews for Online Courses</p>
-      <form class="hero-search" action="/search" method="get" role="search">
+      <form class="hero-search" action={u("/search")} method="get" role="search">
         <input type="search" name="q" placeholder="Search courses ..." aria-label="Search courses" />
         <button type="submit">Search</button>
       </form>
       <p class="popular"><span>Popular:</span>
-        <a href="/programming/python">Python</a>
-        <a href="/programming/javascript">JavaScript</a>
-        <a href="/programming/data-science">Data Science</a>
-        <a href="/programming/excel">Excel</a>
+        <a href={u("/programming/python")}>Python</a>
+        <a href={u("/programming/javascript")}>JavaScript</a>
+        <a href={u("/programming/data-science")}>Data Science</a>
+        <a href={u("/programming/excel")}>Excel</a>
       </p>
     </div>
     <div class="hero-art" aria-hidden="true">
@@ -68,7 +69,7 @@ const fresh = courses.slice(8,12);
       <span class="provider-word">YouTube</span>
       <span class="provider-word">LinkedIn Learning</span>
     </div>
-    <a class="pill-more" href="/courses">+150 more →</a>
+    <a class="pill-more" href={u("/courses")}>+150 more →</a>
   </div>
 </section>
 
@@ -77,12 +78,12 @@ const fresh = courses.slice(8,12);
   <div class="container">
     <div class="sec-head">
       <div><h2>Browse by topic</h2><p>Pick a subject to see its best courses</p></div>
-      <a class="link-more" href="/programming">All 117 topics →</a>
+      <a class="link-more" href={u("/programming")}>All 117 topics →</a>
     </div>
     <div class="topic-grid">
       {topTopics.map(t => (
-        <a class="topic-card" href={`/programming/${t.slug}`}>
-          <span class="topic-ico"><img src={`/images/categories/${t.slug}.svg`} alt={t.name} width="64" height="64" loading="lazy" /></span>
+        <a class="topic-card" href={u(`/programming/${t.slug}`)}>
+          <span class="topic-ico"><img src={u(`/images/categories/${t.slug}.svg`)} alt={t.name} width="64" height="64" loading="lazy" /></span>
           <span><b>{t.name}</b><small>{t.courses.toLocaleString()} courses</small></span>
         </a>
       ))}
@@ -95,7 +96,7 @@ const fresh = courses.slice(8,12);
   <div class="container">
     <div class="sec-head">
       <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;letter-spacing:.06em;margin:0">Top rated</p><h2>Courses students rate highest</h2></div>
-      <a class="link-more" href="/courses">Browse all courses →</a>
+      <a class="link-more" href={u("/courses")}>Browse all courses →</a>
     </div>
     <div class="course-grid">
       {topRated.map(c => <CourseCard course={c} />)}
@@ -120,12 +121,12 @@ const fresh = courses.slice(8,12);
   <div class="container">
     <div class="sec-head">
       <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">Most reviewed</p><h2>Instructors students trust most</h2></div>
-      <a class="link-more" href="/instructors">The top 10, ranked →</a>
+      <a class="link-more" href={u("/instructors")}>The top 10, ranked →</a>
     </div>
     <div class="inst-grid">
       {instructors.map(i => (
-        <a class="inst-card" href="/instructors">
-          <span class="avatar"><img src={`/images/instructors/${i.slug}.svg`} alt={i.name} width="144" height="144" loading="lazy" /></span>
+        <a class="inst-card" href={u("/instructors")}>
+          <span class="avatar"><img src={u(`/images/instructors/${i.slug}.svg`)} alt={i.name} width="144" height="144" loading="lazy" /></span>
           <b>{i.name}</b>
           <small>{i.courses} courses, {i.reviews} reviews</small>
           <div style="margin-top:6px;font-size:13px">⭐ {i.rating} • {i.specialty}</div>
@@ -164,12 +165,12 @@ const fresh = courses.slice(8,12);
   <div class="container">
     <div class="sec-head">
       <div><p style="font-weight:800;color:var(--blue);text-transform:uppercase;font-size:13px;margin:0">From the blog</p><h2>Guides and comparisons</h2></div>
-      <a class="link-more" href="/blog">All posts →</a>
+      <a class="link-more" href={u("/blog")}>All posts →</a>
     </div>
     <div class="blog-grid">
       {posts.map(p => (
-        <a class="post-card" href="/blog">
-          <span class="post-thumb"><img src={`/images/blog/${p.slug}.svg`} alt={p.title} width="640" height="300" loading="lazy" /></span>
+        <a class="post-card" href={u("/blog")}>
+          <span class="post-thumb"><img src={u(`/images/blog/${p.slug}.svg`)} alt={p.title} width="640" height="300" loading="lazy" /></span>
           <div class="post-body"><time>{p.date}</time><h3>{p.title}</h3><p style="color:var(--muted);font-size:14px;margin:0">{p.excerpt}</p></div>
         </a>
       ))}
@@ -181,7 +182,7 @@ const fresh = courses.slice(8,12);
 <section class="cta">
   <div class="container cta-inner">
     <div><h2>Taken a course lately?</h2><p style="margin:0">A two-minute review helps thousands of students pick the right course. Providers cannot edit or remove what you write.</p></div>
-    <a class="btn-dark" href="/review-course">Write a review →</a>
+    <a class="btn-dark" href={u("/review-course")}>Write a review →</a>
   </div>
 </section>
 

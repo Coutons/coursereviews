@@ -1,9 +1,10 @@
 ---
+import { u } from "../lib/u";
 ---
 <footer class="footer">
   <div class="container footer-grid">
     <div class="footer-brand">
-      <a class="logo" href="/" style="color:#fff">
+      <a class="logo" href={u("/")} style="color:#fff">
         <span class="logo-mark" style="background:var(--yellow);color:var(--ink)">🎓</span>
         <span>Course<em style="color:#ffc900">Reviews</em></span>
       </a>
@@ -17,28 +18,28 @@
     </div>
     <div>
       <h4>Browse</h4>
-      <a href="/programming">All categories</a>
-      <a href="/programming/python">Python</a>
-      <a href="/programming/javascript">JavaScript</a>
-      <a href="/programming/data-science">Data Science</a>
-      <a href="/programming/excel">Excel</a>
-      <a href="/courses">All courses A-Z</a>
-      <a href="/instructors">All instructors A-Z</a>
+      <a href={u("/programming")}>All categories</a>
+      <a href={u("/programming/python")}>Python</a>
+      <a href={u("/programming/javascript")}>JavaScript</a>
+      <a href={u("/programming/data-science")}>Data Science</a>
+      <a href={u("/programming/excel")}>Excel</a>
+      <a href={u("/courses")}>All courses A-Z</a>
+      <a href={u("/instructors")}>All instructors A-Z</a>
     </div>
     <div>
       <h4>Company</h4>
-      <a href="/about-us">About us</a>
-      <a href="/blog">Blog</a>
-      <a href="/review-course">Write a review</a>
-      <a href="/contact">Contact</a>
-      <a href="/login">My account</a>
+      <a href={u("/about-us")}>About us</a>
+      <a href={u("/blog")}>Blog</a>
+      <a href={u("/review-course")}>Write a review</a>
+      <a href={u("/contact")}>Contact</a>
+      <a href={u("/login")}>My account</a>
     </div>
     <div>
       <h4>Small print</h4>
-      <a href="/terms">Terms & conditions</a>
-      <a href="/privacy">Privacy policy</a>
-      <a href="/cookies">Cookie policy</a>
-      <a href="/code-of-conduct">Code of conduct</a>
+      <a href={u("/terms")}>Terms & conditions</a>
+      <a href={u("/privacy")}>Privacy policy</a>
+      <a href={u("/cookies")}>Cookie policy</a>
+      <a href={u("/code-of-conduct")}>Code of conduct</a>
     </div>
     <div>
       <h4>Weekly newsletter</h4>
@@ -51,6 +52,6 @@
   </div>
   <div class="container footer-bottom">
     <span>© 2026 CourseReviews built with Astro.js — All rights reserved.</span>
-    <span>Some links are affiliate links, at no cost to you. <a href="/about-us" style="display:inline;color:#fff">How we rank →</a></span>
+    <span>Some links are affiliate links, at no cost to you. <a href={u("/about-us")} style="display:inline;color:#fff">How we rank →</a></span>
   </div>
 </footer>

@@ -5,11 +5,13 @@ import Footer from "../components/Footer.astro";
 import CourseCard from "../components/CourseCard.astro";
 import { courses } from "../data/courses";
 import { categories } from "../data/categories";
+import { u } from "../lib/u";
+const base = import.meta.env.BASE_URL;
 ---
 <Layout title="Search courses — CourseReviews">
 <Header />
 <section class="page-hero"><div class="container"><h1>Search</h1><p>Search courses, instructors, and topics.</p>
-<form action="/search" method="get" class="hero-search" style="margin-top:14px;max-width:560px">
+<form action={u("/search")} method="get" class="hero-search" style="margin-top:14px;max-width:560px">
 <input name="q" id="searchInput" placeholder="Try 'Python', 'Excel', 'Angela Yu'…" />
 <button type="submit">Search</button>
 </form>
@@ -20,13 +22,13 @@ import { categories } from "../data/categories";
 <h2 style="margin-top:28px">Browse topics</h2>
 <div class="topic-grid">
 {categories.slice(0,8).map(t => (
-<a class="topic-card" href={`/programming/${t.slug}`}><span class="topic-ico"><img src={`/images/categories/${t.slug}.svg`} alt={t.name} width="64" height="64" loading="lazy" /></span><span><b>{t.name}</b><small>{t.courses} courses</small></span></a>
+<a class="topic-card" href={u(`/programming/${t.slug}`)}><span class="topic-ico"><img src={u(`/images/categories/${t.slug}.svg`)} alt={t.name} width="64" height="64" loading="lazy" /></span><span><b>{t.name}</b><small>{t.courses} courses</small></span></a>
 ))}
 </div>
 </div></section>
 <Footer />
 </Layout>
-<script define:vars={{ courses }}>
+<script define:vars={{ courses, base }}>
   const params = new URLSearchParams(location.search);
   const q = (params.get('q') || '').toLowerCase();
   const input = document.getElementById('searchInput');
@@ -39,8 +41,8 @@ import { categories } from "../data/categories";
   if (count) count.textContent = q ? `${hits.length} result(s) for "${params.get('q')}"` : 'Popular courses';
   if (box) {
     box.innerHTML = hits.map(c => `
-      <a class="course-card" href="/course/${c.slug}">
-        <div class="course-thumb"><img src="/images/courses/${c.slug}.svg" alt="${c.title}" loading="lazy" /></div>
+      <a class="course-card" href="${base}course/${c.slug}">
+        <div class="course-thumb"><img src="${base}images/courses/${c.slug}.svg" alt="${c.title}" loading="lazy" /></div>
         <div class="course-body">
           <div class="course-meta"><i>${c.provider}</i>${c.category}</div>
           <h3 class="course-title">${c.title}</h3>

@@ -1,11 +1,12 @@
 ---
 import { categories, groups } from "../data/categories";
+import { u } from "../lib/u";
 const popular = ["it-and-software","personal-development","business","web-development","health-and-fitness","it-certifications","finance-and-accounting","python"];
 const popularCats = popular.map(s => categories.find(c=>c.slug===s)!).filter(Boolean);
 ---
 <header class="site-header">
   <div class="container header-main">
-    <a class="logo" href="/" aria-label="CourseReviews home">
+    <a class="logo" href={u("/")} aria-label="CourseReviews home">
       <span class="logo-mark">🎓</span>
       <span>Course<em>Reviews</em></span>
     </a>
@@ -17,26 +18,26 @@ const popularCats = popular.map(s => categories.find(c=>c.slug===s)!).filter(Boo
           <div>
             <h4>{g}</h4>
             {categories.filter(c => c.group===g).slice(0,6).map((c) => (
-              <a class="item" href={`/programming/${c.slug}`}><img src={`/images/categories/${c.slug}.svg`} alt="" width="36" height="36" loading="lazy" /> {c.name}</a>
+              <a class="item" href={u(`/programming/${c.slug}`)}><img src={u(`/images/categories/${c.slug}.svg`)} alt="" width="36" height="36" loading="lazy" /> {c.name}</a>
             ))}
           </div>
         ))}
         <div class="mega-foot">
-          <a href="/programming">Browse every category</a>
-          <a href="/courses">All courses A-Z</a>
-          <a href="/instructors">All instructors A-Z</a>
+          <a href={u("/programming")}>Browse every category</a>
+          <a href={u("/courses")}>All courses A-Z</a>
+          <a href={u("/instructors")}>All instructors A-Z</a>
         </div>
       </div>
     </div>
 
-    <form class="searchbar" action="/search" method="get" role="search" autocomplete="off">
+    <form class="searchbar" action={u("/search")} method="get" role="search" autocomplete="off">
       <input type="search" name="q" placeholder="Search courses, instructors, topics..." aria-label="Search courses" />
       <button type="submit">Search</button>
     </form>
 
     <div class="header-actions">
-      <a class="btn-review" href="/review-course" title="Write a review">✎ Write a review</a>
-      <a class="btn-sign" href="/login" title="Sign in">👤 Sign in</a>
+      <a class="btn-review" href={u("/review-course")} title="Write a review">✎ Write a review</a>
+      <a class="btn-sign" href={u("/login")} title="Sign in">👤 Sign in</a>
     </div>
     <button class="mobile-toggle" id="mobileBtn" aria-label="Menu">☰</button>
   </div>
@@ -46,13 +47,13 @@ const popularCats = popular.map(s => categories.find(c=>c.slug===s)!).filter(Boo
   <div class="container subnav-inner">
     <div class="subnav-topics">
       <span class="subnav-label">🔥 Popular</span>
-      {popularCats.map(c => <a href={`/programming/${c.slug}`}>{c.name}</a>)}
-      <a href="/programming" style="color:var(--navy);font-weight:600">All categories →</a>
+      {popularCats.map(c => <a href={u(`/programming/${c.slug}`)}>{c.name}</a>)}
+      <a href={u("/programming")} style="color:var(--navy);font-weight:600">All categories →</a>
     </div>
     <div class="subnav-links">
-      <a href="/blog">Blog</a>
-      <a href="/about-us">About</a>
-      <a href="/contact">Contact</a>
+      <a href={u("/blog")}>Blog</a>
+      <a href={u("/about-us")}>About</a>
+      <a href={u("/contact")}>Contact</a>
     </div>
   </div>
 </nav>

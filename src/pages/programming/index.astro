@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
 import { categories, groups } from "../../data/categories";
+import { u } from "../../lib/u";
 ---
 <Layout title="Browse every category — CourseReviews">
 <Header />
@@ -13,8 +14,8 @@ import { categories, groups } from "../../data/categories";
     <h2 id={`group-${g.toLowerCase().replace(/[^a-z0-9]+/g,'-')}`} style="color:var(--navy)">{g}</h2>
     <div class="topic-grid">
       {categories.filter(c=>c.group===g).map(c => (
-        <a class="topic-card" href={`/programming/${c.slug}`}>
-          <span class="topic-ico"><img src={`/images/categories/${c.slug}.svg`} alt={c.name} width="64" height="64" loading="lazy" /></span>
+        <a class="topic-card" href={u(`/programming/${c.slug}`)}>
+          <span class="topic-ico"><img src={u(`/images/categories/${c.slug}.svg`)} alt={c.name} width="64" height="64" loading="lazy" /></span>
           <span><b>{c.name}</b><small>{c.courses.toLocaleString()} courses</small></span>
         </a>
       ))}
